@@ -1,15 +1,29 @@
 import { parkingLots } from "@/data/static-data";
 import { Car, MapPin, DollarSign, AlertTriangle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import DowntownMap, { MapMarker } from "@/components/DowntownMap";
 
 const typeLabel = { lot: "Surface Lot", garage: "Parking Garage", street: "On-Street" };
 
 const ParkingPage = () => {
+  const markers: MapMarker[] = parkingLots.map((lot) => ({
+    lat: lot.lat,
+    lng: lot.lng,
+    label: lot.name,
+    popup: `${lot.spots} spots · ${lot.rate}`,
+    color: "blue",
+  }));
+
   return (
     <div className="animate-fade-in">
       <div className="px-4 pt-6 pb-4">
         <h1 className="text-xl font-bold">Parking Guide</h1>
         <p className="text-sm text-muted-foreground mt-1">Find parking near downtown</p>
+      </div>
+
+      {/* Map */}
+      <div className="px-4 mb-4">
+        <DowntownMap markers={markers} height="220px" />
       </div>
 
       <div className="px-4 space-y-3 pb-6">

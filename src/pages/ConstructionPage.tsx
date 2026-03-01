@@ -1,6 +1,7 @@
 import { constructionUpdates } from "@/data/static-data";
 import { AlertTriangle, Clock, MapPin } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import DowntownMap, { MapMarker } from "@/components/DowntownMap";
 
 const severityStyles = {
   high: "bg-destructive/10 text-destructive border-destructive/20",
@@ -14,12 +15,31 @@ const severityBadge = {
   low: "outline" as const,
 };
 
+const severityColor: Record<string, "red" | "orange" | "green"> = {
+  high: "red",
+  medium: "orange",
+  low: "green",
+};
+
 const ConstructionPage = () => {
+  const markers: MapMarker[] = constructionUpdates.map((u) => ({
+    lat: u.lat,
+    lng: u.lng,
+    label: u.title,
+    popup: u.affectedStreets.join(", "),
+    color: severityColor[u.severity],
+  }));
+
   return (
     <div className="animate-fade-in">
       <div className="px-4 pt-6 pb-4">
         <h1 className="text-xl font-bold">Construction Updates</h1>
         <p className="text-sm text-muted-foreground mt-1">Latest road closures & access changes</p>
+      </div>
+
+      {/* Map */}
+      <div className="px-4 mb-4">
+        <DowntownMap markers={markers} height="220px" />
       </div>
 
       <div className="px-4 space-y-3 pb-6">
