@@ -5,6 +5,8 @@ export interface ConstructionUpdate {
   description: string;
   affectedStreets: string[];
   severity: "low" | "medium" | "high";
+  lat: number;
+  lng: number;
 }
 
 export interface Business {
@@ -29,6 +31,8 @@ export interface ParkingLot {
   rate: string;
   type: "lot" | "garage" | "street";
   accessNote: string;
+  lat: number;
+  lng: number;
 }
 
 export interface BingoSquare {
@@ -46,6 +50,8 @@ export const constructionUpdates: ConstructionUpdate[] = [
     description: "Water main replacement between Macdonell St and Quebec St. Expect lane reductions and detours. Pedestrian access maintained on east side.",
     affectedStreets: ["Wyndham St N", "Macdonell St"],
     severity: "high",
+    lat: 43.5450,
+    lng: -80.2488,
   },
   {
     id: "2",
@@ -53,6 +59,8 @@ export const constructionUpdates: ConstructionUpdate[] = [
     date: "2026-02-25",
     description: "Road resurfacing project on Cork St between Wyndham and Norfolk. Work scheduled weekdays 7am–5pm.",
     affectedStreets: ["Cork St"],
+    lat: 43.5438,
+    lng: -80.2502,
     severity: "medium",
   },
   {
@@ -61,6 +69,8 @@ export const constructionUpdates: ConstructionUpdate[] = [
     date: "2026-02-20",
     description: "Sidewalk repairs on south side of Quebec St. Brief pedestrian detours in place. All businesses remain accessible.",
     affectedStreets: ["Quebec St"],
+    lat: 43.5447,
+    lng: -80.2478,
     severity: "low",
   },
   {
@@ -69,6 +79,8 @@ export const constructionUpdates: ConstructionUpdate[] = [
     date: "2026-03-01",
     description: "Underground utility upgrades on Carden St near Market Square. Short-term parking may be affected.",
     affectedStreets: ["Carden St"],
+    lat: 43.5442,
+    lng: -80.2508,
     severity: "medium",
   },
 ];
@@ -191,6 +203,8 @@ export const parkingLots: ParkingLot[] = [
     rate: "$2/hr, $12/day max",
     type: "garage",
     accessNote: "Main entrance on Wilson St. Fully accessible during construction.",
+    lat: 43.5462,
+    lng: -80.2498,
   },
   {
     id: "2",
@@ -200,6 +214,8 @@ export const parkingLots: ParkingLot[] = [
     rate: "$1.50/hr",
     type: "lot",
     accessNote: "Open lot, no construction impact.",
+    lat: 43.5465,
+    lng: -80.2472,
   },
   {
     id: "3",
@@ -209,6 +225,8 @@ export const parkingLots: ParkingLot[] = [
     rate: "$1.50/hr",
     type: "lot",
     accessNote: "Access from Quebec St. Sidewalk detour nearby.",
+    lat: 43.5445,
+    lng: -80.2470,
   },
   {
     id: "4",
@@ -218,6 +236,8 @@ export const parkingLots: ParkingLot[] = [
     rate: "Free on Saturdays",
     type: "lot",
     accessNote: "Use Gordon St entrance during Wyndham construction.",
+    lat: 43.5440,
+    lng: -80.2512,
   },
   {
     id: "5",
@@ -227,6 +247,8 @@ export const parkingLots: ParkingLot[] = [
     rate: "$1.50/hr",
     type: "street",
     accessNote: "Some spots temporarily unavailable due to utility work.",
+    lat: 43.5443,
+    lng: -80.2505,
   },
 ];
 

@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { businesses, categories } from "@/data/static-data";
-import { Search, MapPin, Clock, Phone, ExternalLink, AlertTriangle } from "lucide-react";
+import { Search, MapPin, Clock, Phone, ExternalLink, AlertTriangle, Map, List } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import DowntownMap, { MapMarker } from "@/components/DowntownMap";
 
 const DirectoryPage = () => {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [showMap, setShowMap] = useState(false);
 
   const filtered = businesses.filter((b) => {
     const matchesSearch =
@@ -16,11 +18,28 @@ const DirectoryPage = () => {
     return matchesSearch && matchesCategory;
   });
 
+  const markers: MapMarker[] = filtered.map((b) => ({
+    lat: b.lat,
+    lng: b.lng,
+    label: b.name,
+    popup: `${b.category} · ${b.address}`,
+    color: "green",
+  }));
+
   return (
     <div className="animate-fade-in">
-      <div className="px-4 pt-6 pb-3">
-        <h1 className="text-xl font-bold">Business Directory</h1>
-        <p className="text-sm text-muted-foreground mt-1">Discover downtown businesses</p>
+      <div className="px-4 pt-6 pb-3 flex items-start justify-between">
+        <div>
+          <h1 className="text-xl font-bold">Business Directory</h1>
+          <p className="text-sm text-muted-foreground mt-1">Discover downtown businesses</p>
+        </div>
+        <button
+          onClick={() => setShowMap(!showMap)}
+          className="p-2 rounded-lg bg-muted text-muted-foreground hover:text-foreground transition-colors"
+          aria-label={showMap ? "Show list" : "Show map"}
+        >
+          {showMap ? <List className="w-5 h-5" /> : <Map className="w-5 h-5" />}
+        </button>
       </div>
 
       {/* Search */}
@@ -52,6 +71,13 @@ const DirectoryPage = () => {
           </button>
         ))}
       </div>
+
+      {/* Map view */}
+      {showMap && (
+        <div className="px-4 mb-4 animate-fade-in">
+          <DowntownMap markers={markers} height="280px" />
+        </div>
+      )}
 
       {/* Listings */}
       <div className="px-4 space-y-3 pb-6">
