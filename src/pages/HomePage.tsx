@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Construction, Store, Car, Grid3X3, AlertTriangle, ArrowRight } from "lucide-react";
 import { constructionUpdates } from "@/data/static-data";
-import heroImage from "@/assets/hero-downtown.webp";
 
 const quickLinks = [
   { to: "/construction", icon: Construction, label: "Construction Updates", color: "bg-construction/10 text-construction" },
@@ -9,6 +8,8 @@ const quickLinks = [
   { to: "/parking", icon: Car, label: "Find Parking", color: "bg-secondary/20 text-secondary" },
   { to: "/bingo", icon: Grid3X3, label: "Downtown Bingo", color: "bg-accent/20 text-accent-foreground" },
 ];
+
+const HERO_IMAGE_URL = "/hero-downtown.webp";
 
 const HomePage = () => {
   const latestUpdate = constructionUpdates[0];
@@ -18,10 +19,11 @@ const HomePage = () => {
       {/* Hero */}
       <div className="relative h-52 overflow-hidden">
         <img
-          src={heroImage}
+          src={HERO_IMAGE_URL}
           alt="Downtown Guelph streetscape"
           className="w-full h-full object-cover"
           onError={(event) => {
+            event.currentTarget.onerror = null;
             event.currentTarget.src = "/placeholder.svg";
           }}
         />
