@@ -17,7 +17,14 @@ const HomePage = () => {
     <div className="animate-fade-in">
       {/* Hero */}
       <div className="relative h-52 overflow-hidden">
-        <img src={heroImage} alt="Downtown Guelph streetscape" className="w-full h-full object-cover" />
+        <img
+          src={heroImage}
+          alt="Downtown Guelph streetscape"
+          className="w-full h-full object-cover"
+          onError={(event) => {
+            event.currentTarget.src = "/placeholder.svg";
+          }}
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
         <div className="absolute bottom-4 left-4 right-4">
           <h1 className="text-2xl font-bold tracking-tight">Downtown Guelph</h1>
